@@ -11,7 +11,6 @@ private:
 public:
     Elements_text();
     Elements_text(std::string,std::string);
-    Elements_text(const Elements_text&);
     std::string get_element()const;
     std::string get_text()const;
     friend std::ostream& operator<<(std::ostream&, Elements_text&);
