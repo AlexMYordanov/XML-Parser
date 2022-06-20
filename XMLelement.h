@@ -8,7 +8,7 @@
 
 class XMLelement
 {
-protected:
+private:
     int id;
     static int next_id;
 
@@ -22,6 +22,7 @@ protected:
     void cpy(const XMLelement&);
 
 public:
+    static int depth;
     XMLelement();
     XMLelement( Attributes_values*,int,Elements_text*,int);
     XMLelement(const XMLelement& );
@@ -30,15 +31,12 @@ public:
 	int get_id() const;
 	int get_a_size() const;
 	int get_e_size() const;
-	Attributes_values get_att(int)const;
-	Elements_text get_el(int)const;
+	Attributes_values& get_att(int);
+	Elements_text& get_el(int);
 	Elements_text* get_elements()const;
 	friend std::ostream& operator<<(std::ostream& , XMLelement&);
+	void print();
     ~XMLelement();
-
-
-
-
 };
 
 #endif // XMLELEMENT_H_INCLUDED
