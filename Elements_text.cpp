@@ -6,12 +6,6 @@ Elements_text::Elements_text()
 Elements_text::Elements_text(std::string _element, std::string _text)
 :element(_element), text(_text){}
 
-Elements_text::Elements_text(const Elements_text& other)
-{
-    element=other.element;
-    text=other.text;
-}
-
 std::string Elements_text::get_element()const
 {
     return element;
