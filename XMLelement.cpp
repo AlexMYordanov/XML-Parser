@@ -1,8 +1,8 @@
 #include "XMLelement.h"
 #include <iomanip>
 
- const int depth=6;
 int XMLelement::next_id=0;
+int XMLelement::depth=6;
 
 void XMLelement::alloc(int attributeSize, int elementsSize)
 {
@@ -89,11 +89,11 @@ int XMLelement::get_e_size() const
     return el_size;
 }
 
-Attributes_values XMLelement::get_att(int index)const
+Attributes_values& XMLelement::get_att(int index)
 {
     return attributes[index-1];
 }
-Elements_text XMLelement::get_el(int index)const
+Elements_text& XMLelement::get_el(int index)
 {
     return elements[index-1];
 }
@@ -110,18 +110,41 @@ std::ostream& operator<<(std::ostream& os, XMLelement& unit)
     int a=unit.get_a_size();
 
     for(int i=1;i<=a;++i)
-        os<<' '<<unit.get_att(i).get_attribute()<<'='<<'"'<<unit.get_att(i).get_value()<<'"';
-    os<<">"<<"\n";
+      os<<unit.get_att(i);
 
+     os<<">\n";
      int e=unit.get_e_size();
      for(int i=2;i<=e;++i)
        {
            os << std::setw(6) << " ";
-           os<<'<'<<unit.get_el(i).get_element()<<'>'<<unit.get_el(i).get_text()
-           <<"</"<<unit.get_el(i).get_element()<<">\n";
+
+           os<<unit.get_el(i);
+
        }
     os<<"</"<<unit.get_el(1).get_element()<<'>'<<'\n';
     return os;
+}
+
+void XMLelement::print()
+{
+    int new_depth=depth-6;
+    std::cout << std::setw(new_depth);
+    std::cout<<"<"<<get_el(1).get_element()<<" "<<"id="<<'"'<<get_id()<<'"';
+    int a=get_a_size();
+
+    for(int i=1;i<=a;++i)
+        std::cout<<get_att(i);
+
+     std::cout<<'>'<<std::endl;
+     int e=get_e_size();
+     for(int i=2;i<=e;++i)
+       {
+           std::cout << std::setw(depth);
+           std::cout<<get_el(i);
+       }
+   std::cout << std::setw(new_depth);
+   std::cout<<"</"<<get_el(1).get_element()<<'>'<<'\n';
+
 }
 
 XMLelement::~XMLelement()
