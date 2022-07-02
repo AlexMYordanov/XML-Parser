@@ -272,6 +272,8 @@ int Source::print_main()const
 
     }
     while(choice!=14);
+    
+    file<<G;
 
     return 0;
 }
