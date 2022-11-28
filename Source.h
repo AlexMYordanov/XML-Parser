@@ -243,7 +243,7 @@ int Source::print_main()const
                 std::cout<<"The text elements are:";
                 for(int i=0; i<cnt; ++i)
                     std::cout<<tp[i]<<'\n';
-                delete[] tp;
+                delete tp;
             }
         }
         break;
